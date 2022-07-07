@@ -2,6 +2,7 @@ package Suite1;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.testng.Assert;
+import org.testng.Reporter;
 import org.testng.annotations.DataProvider;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
@@ -61,7 +62,7 @@ public class MyTests {
     }
 
     @Test(description = "My description :", priority = 4,dataProvider = "SearchTexts")
-    public void Search(String text) throws InterruptedException {
+    public void Search(String text) throws InterruptedException, IOException {
         Thread.sleep(2000);
         WebElement searchText = webDriver.findElement(By.id("small-searchterms"));
         searchText.sendKeys(text);
@@ -71,6 +72,11 @@ public class MyTests {
 
         Thread.sleep(2000);
         WebElement CheckElement = webDriver.findElement(By.className("product-item"));
+
+        File Pthoto = CheckElement.getScreenshotAs(OutputType.FILE);
+        File Destenation = new File("Images/Check Texte.png");
+        FileUtils.copyFile(Pthoto,Destenation);
+
         Assert.assertEquals(CheckElement.isDisplayed(),true);
     }
 

@@ -5,6 +5,7 @@
         <classes>
             <class name="Suite1.MyTests">
                 <methods>
+                    <include name="Search"/>
                     <include name="Login"/>
                 </methods>
             </class>
